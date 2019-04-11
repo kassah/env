@@ -1,0 +1,22 @@
+# wget -O ${HOME}/bin/kassah/kubectl_aliases https://rawgit.com/ahmetb/kubectl-alias/master/.kubectl_aliases
+EDITOR=vim
+MAINDIR=${HOME}/bin/kassah
+source ${MAINDIR}/kubectl_aliases
+alias khelp='printf "
+   base       [system?]      [operation]   [resource]   [flags]
+ --------- ---------------- ------------- ------------ ---------
+  \e[4mk\e[0mubectl   -n=kube-\e[4msys\e[0mtem   \e[4mg\e[0met           \e[4mpo\e[0mds         \e[4moyaml\e[0m
+                             \e[4md\e[0mescribe      \e[4mdep\e[0mloyment   \e[4mojson\e[0m
+                             \e[4mrm\e[0m:delete     \e[4msec\e[0mret       \e[4mowide\e[0m
+                             \e[4mlo\e[0mgs          \e[4ming\e[0mress      \e[4mall\e[0m
+                             \e[4mex\e[0mec          \e[4mno\e[0mde         \e[4mw\e[0match
+                             \e[4ma\e[0mpply         \e[4msvc\e[0m          \e[4mf\e[0mile
+                                           \e[4mns\e[0m           \e[4ml\e[0
+                                           \e[4mcm\e[0m
+"'
+# alias kwatch="watch -n 0.5 \"kubectl config current-context; kubectl config view | grep namespace; echo ''; kubectl get namespace,node,ingress,pod,svc,job,cronjob,deployment,rs,pv,pvc,secret,ep -o wide\""
+alias kwatch="watch -t -n 0.5 \"kubectl get node,ingress,pod,svc,job,cronjob,deployment,rs,pv,pvc,secret,ep,networkpolicy -o wide\""
+alias ksetns="kubectl config set-context $(kubectl config current-context) --namespace"
+alias kcpo="kubectl run --restart=Never"
+alias kcnp="cat ${MAINDIR}/snip/np/template.yaml | vim -"
+alias kcpvc="cat ${MAINDIR}/snip/pvc/pvc.yaml | vim -"
